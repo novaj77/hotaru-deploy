@@ -16,3 +16,10 @@ releases:
     version: 3.5.0
     values:
       - values/aws-load-balancer-controller.yaml
+
+  - name: cluster-autoscaler
+    namespace: kube-system
+    chart: autoscaler/cluster-autoscaler
+    version: 9.59.0
+    values:
+      - values/cluster-autoscaler.yaml

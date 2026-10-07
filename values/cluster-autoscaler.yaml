@@ -1,0 +1,4 @@
+cloudProvider: aws
+awsRegion: ap-northeast-1
+autoDiscovery:
+  clusterName: hotaru
