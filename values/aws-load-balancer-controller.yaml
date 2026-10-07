@@ -11,3 +11,6 @@ serviceAccount:
 defaultTargetType: ip
 
 enableServiceMutatorWebhook: false
+
+nodeSelector:
+  role: system
