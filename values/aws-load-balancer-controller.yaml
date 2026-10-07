@@ -9,3 +9,5 @@ serviceAccount:
   name: aws-load-balancer-controller
 
 defaultTargetType: ip
+
+enableServiceMutatorWebhook: false
