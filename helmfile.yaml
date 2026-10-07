@@ -29,3 +29,6 @@ releases:
     chart: ./charts/hotaru-api
     values:
       - values/hotaru-api.yaml
+    needs:
+      - kube-system/aws-load-balancer-controller
+      - kube-system/cluster-autoscaler
