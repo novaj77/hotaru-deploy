@@ -7,3 +7,5 @@ replicaCount: 1
 
 serviceAccount:
   name: aws-load-balancer-controller
+
+defaultTargetType: ip
