@@ -9,3 +9,6 @@ image:
 rbac:
   serviceAccount:
     name: cluster-autoscaler
+
+nodeSelector:
+  role: system
