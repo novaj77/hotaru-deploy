@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: hotaru-api
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ required "image.repository is required" .Values.image.repository }}:{{ required "image.tag is required" .Values.image.tag }}"
           ports:
             - name: http
               containerPort: 8080
