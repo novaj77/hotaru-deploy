@@ -4,3 +4,5 @@ repositories:
   - name: autoscaler
     url: https://kubernetes.github.io/autoscaler
 
+helmDefaults:
+  kubeContext: hotaru
