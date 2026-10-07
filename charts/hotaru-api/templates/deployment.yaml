@@ -37,6 +37,8 @@ spec:
             httpGet:
               path: /healthz
               port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
