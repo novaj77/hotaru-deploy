@@ -3,5 +3,7 @@ region: ap-northeast-1
 vpcTags:
   Name: hotaru
 
+replicaCount: 1
+
 serviceAccount:
   name: aws-load-balancer-controller
