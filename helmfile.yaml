@@ -8,3 +8,11 @@ helmDefaults:
   kubeContext: hotaru
   wait: true
   timeout: 300
+
+releases:
+  - name: aws-load-balancer-controller
+    namespace: kube-system
+    chart: eks/aws-load-balancer-controller
+    version: 3.5.0
+    values:
+      - values/aws-load-balancer-controller.yaml
