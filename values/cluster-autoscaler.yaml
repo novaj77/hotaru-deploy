@@ -5,3 +5,7 @@ autoDiscovery:
 
 image:
   tag: v1.36.1
+
+rbac:
+  serviceAccount:
+    name: cluster-autoscaler
