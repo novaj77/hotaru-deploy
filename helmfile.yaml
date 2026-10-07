@@ -1,0 +1,6 @@
+repositories:
+  - name: eks
+    url: https://aws.github.io/eks-charts
+  - name: autoscaler
+    url: https://kubernetes.github.io/autoscaler
+
