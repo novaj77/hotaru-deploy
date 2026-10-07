@@ -23,3 +23,9 @@ releases:
     version: 9.59.0
     values:
       - values/cluster-autoscaler.yaml
+
+  - name: hotaru-api
+    namespace: hotaru
+    chart: ./charts/hotaru-api
+    values:
+      - values/hotaru-api.yaml
