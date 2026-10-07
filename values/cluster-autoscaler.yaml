@@ -2,3 +2,6 @@ cloudProvider: aws
 awsRegion: ap-northeast-1
 autoDiscovery:
   clusterName: hotaru
+
+image:
+  tag: v1.36.1
