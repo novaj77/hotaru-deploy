@@ -23,6 +23,10 @@ spec:
         runAsGroup: 65532
         seccompProfile:
           type: RuntimeDefault
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
       containers:
         - name: hotaru-api
           image: "{{ required "image.repository is required" .Values.image.repository }}:{{ required "image.tag is required" .Values.image.tag }}"
