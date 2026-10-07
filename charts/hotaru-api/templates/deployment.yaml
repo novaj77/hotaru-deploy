@@ -37,3 +37,9 @@ spec:
             httpGet:
               path: /healthz
               port: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
