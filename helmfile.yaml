@@ -32,3 +32,4 @@ releases:
     needs:
       - kube-system/aws-load-balancer-controller
       - kube-system/cluster-autoscaler
+    timeout: 600
