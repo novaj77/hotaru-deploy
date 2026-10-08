@@ -42,4 +42,5 @@ releases:
     needs:
       - kube-system/aws-load-balancer-controller
       - kube-system/cluster-autoscaler
+      - kube-system/external-dns
     timeout: 600
