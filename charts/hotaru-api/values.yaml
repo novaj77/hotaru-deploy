@@ -4,6 +4,9 @@ image:
   repository: ""
   tag: ""
 
+ingress:
+  host: ""
+
 resources:
   requests:
     cpu: 10m
