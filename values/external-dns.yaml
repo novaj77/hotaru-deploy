@@ -12,3 +12,5 @@ domainFilters:
   - hotaru-novaj.click
 
 policy: sync
+registry: txt
+txtOwnerId: hotaru
