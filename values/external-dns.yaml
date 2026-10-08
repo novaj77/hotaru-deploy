@@ -17,3 +17,6 @@ txtOwnerId: hotaru
 
 serviceAccount:
   name: external-dns
+
+nodeSelector:
+  role: system
