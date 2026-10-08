@@ -11,6 +11,9 @@ metadata:
     alb.ingress.kubernetes.io/healthcheck-path: /healthz
 spec:
   ingressClassName: alb
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host }}
   rules:
     - host: {{ required "ingress.host is required" .Values.ingress.host }}
       http:
