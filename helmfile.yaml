@@ -3,6 +3,8 @@ repositories:
     url: https://aws.github.io/eks-charts
   - name: autoscaler
     url: https://kubernetes.github.io/autoscaler
+  - name: external-dns
+    url: https://kubernetes-sigs.github.io/external-dns/
 
 helmDefaults:
   kubeContext: hotaru
