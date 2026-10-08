@@ -12,7 +12,8 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: {{ required "ingress.host is required" .Values.ingress.host }}
+      http:
         paths:
           - path: /
             pathType: Prefix
