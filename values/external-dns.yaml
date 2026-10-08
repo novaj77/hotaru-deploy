@@ -8,4 +8,7 @@ env:
 sources:
   - ingress
 
+domainFilters:
+  - hotaru-novaj.click
+
 policy: sync
