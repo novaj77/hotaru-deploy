@@ -5,4 +5,7 @@ env:
   - name: AWS_DEFAULT_REGION
     value: ap-northeast-1
 
+sources:
+  - ingress
+
 policy: sync
