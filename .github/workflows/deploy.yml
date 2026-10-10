@@ -79,3 +79,13 @@ jobs:
           gpg --batch --export "$HELM_DIFF_KEY_FINGERPRINT" > "$RUNNER_TEMP/helm-diff.gpg"
           helm plugin install "https://github.com/databus23/helm-diff/releases/download/v${HELM_DIFF_VERSION}/helm-diff-linux-amd64.tgz" --keyring "$RUNNER_TEMP/helm-diff.gpg"
           helm diff version
+
+      - name: Make sure kube-system is out of reach
+        if: steps.cluster.outputs.exists == 'true'
+        run: |
+          answer=$(kubectl --context hotaru auth can-i create deployments --namespace kube-system || true)
+          echo "create deployments in kube-system: $answer"
+          if [[ "$answer" != no* ]]; then
+            echo "::error::The deploy role must not create deployments in kube-system"
+            exit 1
+          fi
