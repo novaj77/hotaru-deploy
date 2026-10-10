@@ -89,3 +89,7 @@ jobs:
             echo "::error::The deploy role must not create deployments in kube-system"
             exit 1
           fi
+
+      - name: Deploy hotaru-api
+        if: steps.cluster.outputs.exists == 'true'
+        run: helmfile -l name=hotaru-api apply
