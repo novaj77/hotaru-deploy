@@ -52,3 +52,7 @@ jobs:
             cat "$RUNNER_TEMP/describe-cluster.err" >&2
             exit 1
           fi
+
+      - name: Skip when the cluster does not exist
+        if: steps.cluster.outputs.exists == 'false'
+        run: echo "Cluster $CLUSTER_NAME does not exist. Skipped the deployment." >> "$GITHUB_STEP_SUMMARY"
