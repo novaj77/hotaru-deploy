@@ -16,3 +16,14 @@ runs:
         sudo install -m 0755 "$RUNNER_TEMP/linux-amd64/helm" /usr/local/bin/helm
         helm version --short
 
+    - name: Install helmfile
+      shell: bash
+      env:
+        HELMFILE_VERSION: 1.8.1
+        HELMFILE_SHA256: ccabbe75dddbc25008d055fe92a44f95a184342211e7244d32b870409239c7a3
+      run: |
+        curl -fsSLo "$RUNNER_TEMP/helmfile.tar.gz" "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz"
+        echo "${HELMFILE_SHA256}  $RUNNER_TEMP/helmfile.tar.gz" | sha256sum -c -
+        tar -xzf "$RUNNER_TEMP/helmfile.tar.gz" -C "$RUNNER_TEMP" helmfile
+        sudo install -m 0755 "$RUNNER_TEMP/helmfile" /usr/local/bin/helmfile
+        helmfile --version
