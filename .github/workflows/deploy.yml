@@ -60,3 +60,7 @@ jobs:
       - name: Update kubeconfig
         if: steps.cluster.outputs.exists == 'true'
         run: aws eks update-kubeconfig --name "$CLUSTER_NAME" --alias hotaru
+
+      - name: Set up Helm and helmfile
+        if: steps.cluster.outputs.exists == 'true'
+        uses: ./.github/actions/setup-helmfile
