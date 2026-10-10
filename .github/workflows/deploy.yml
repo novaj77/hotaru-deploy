@@ -93,3 +93,15 @@ jobs:
       - name: Deploy hotaru-api
         if: steps.cluster.outputs.exists == 'true'
         run: helmfile -l name=hotaru-api apply
+
+      - name: Write the summary
+        if: steps.cluster.outputs.exists == 'true'
+        run: |
+          image=$(kubectl --context hotaru --namespace hotaru get deployment hotaru-api -o jsonpath='{.spec.template.spec.containers[0].image}')
+          {
+            echo "Deployed hotaru-api with image tag ${image##*:}"
+            echo
+            echo '```'
+            helm list --kube-context hotaru --namespace hotaru
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
