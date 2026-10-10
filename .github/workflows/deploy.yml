@@ -11,10 +11,14 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 concurrency:
   group: deploy-hotaru
   cancel-in-progress: false
+
+env:
+  AWS_REGION: ap-northeast-1
 
 jobs:
   deploy:
@@ -24,3 +28,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
+      - name: Assume role with OIDC
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          role-session-name: hotaru-deploy-ci-${{ github.run_id }}
+          aws-region: ${{ env.AWS_REGION }}
