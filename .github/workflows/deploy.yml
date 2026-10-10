@@ -12,6 +12,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: deploy-hotaru
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-24.04
