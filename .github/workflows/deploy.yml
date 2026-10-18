@@ -61,24 +61,11 @@ jobs:
         if: steps.cluster.outputs.exists == 'true'
         run: aws eks update-kubeconfig --name "$CLUSTER_NAME" --alias hotaru
 
-      - name: Set up Helm and helmfile
+      - name: Set up Helm, helmfile and helm-diff
         if: steps.cluster.outputs.exists == 'true'
         uses: ./.github/actions/setup-helmfile
-
-      - name: Install helm-diff
-        if: steps.cluster.outputs.exists == 'true'
-        env:
-          HELM_DIFF_VERSION: 3.15.13
-          HELM_DIFF_KEY_FINGERPRINT: C5645EF47482257A1F806D2BEA17A2A206AFF8CD
-        run: |
-          export GNUPGHOME="$RUNNER_TEMP/gnupg"
-          mkdir -m 0700 "$GNUPGHOME"
-          curl -fsSLo "$RUNNER_TEMP/databus23.asc" https://github.com/databus23.gpg
-          gpg --batch --import "$RUNNER_TEMP/databus23.asc"
-          gpg --batch --list-keys "$HELM_DIFF_KEY_FINGERPRINT"
-          gpg --batch --export "$HELM_DIFF_KEY_FINGERPRINT" > "$RUNNER_TEMP/helm-diff.gpg"
-          helm plugin install "https://github.com/databus23/helm-diff/releases/download/v${HELM_DIFF_VERSION}/helm-diff-linux-amd64.tgz" --keyring "$RUNNER_TEMP/helm-diff.gpg"
-          helm diff version
+        with:
+          helm-diff: true
 
       - name: Make sure kube-system is out of reach
         if: steps.cluster.outputs.exists == 'true'
