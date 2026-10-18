@@ -1,6 +1,12 @@
 name: Set up Helm and helmfile
 description: Install pinned Helm and helmfile after verifying their SHA-256 checksums
 
+inputs:
+  helm-diff:
+    description: Also install the helm-diff plugin after verifying its signature
+    required: false
+    default: "false"
+
 runs:
   using: composite
   steps:
@@ -27,3 +33,19 @@ runs:
         tar -xzf "$RUNNER_TEMP/helmfile.tar.gz" -C "$RUNNER_TEMP" helmfile
         sudo install -m 0755 "$RUNNER_TEMP/helmfile" /usr/local/bin/helmfile
         helmfile --version
+
+    - name: Install helm-diff
+      if: inputs.helm-diff == 'true'
+      shell: bash
+      env:
+        HELM_DIFF_VERSION: 3.15.13
+        HELM_DIFF_KEY_FINGERPRINT: C5645EF47482257A1F806D2BEA17A2A206AFF8CD
+      run: |
+        export GNUPGHOME="$RUNNER_TEMP/gnupg"
+        mkdir -m 0700 "$GNUPGHOME"
+        curl -fsSLo "$RUNNER_TEMP/databus23.asc" https://github.com/databus23.gpg
+        gpg --batch --import "$RUNNER_TEMP/databus23.asc"
+        gpg --batch --list-keys "$HELM_DIFF_KEY_FINGERPRINT"
+        gpg --batch --export "$HELM_DIFF_KEY_FINGERPRINT" > "$RUNNER_TEMP/helm-diff.gpg"
+        helm plugin install "https://github.com/databus23/helm-diff/releases/download/v${HELM_DIFF_VERSION}/helm-diff-linux-amd64.tgz" --keyring "$RUNNER_TEMP/helm-diff.gpg"
+        helm diff version
