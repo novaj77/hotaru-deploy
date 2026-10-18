@@ -1,6 +1,12 @@
 name: Set up Helm and helmfile
 description: Install pinned Helm and helmfile after verifying their SHA-256 checksums
 
+inputs:
+  helm-diff:
+    description: Also install the helm-diff plugin after verifying its signature
+    required: false
+    default: "false"
+
 runs:
   using: composite
   steps:
